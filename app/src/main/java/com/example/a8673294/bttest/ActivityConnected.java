@@ -15,10 +15,12 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
     Button buttonSend;
     EditText editTextToSend;
 
-    Switch mode;
-    Button st;
+
+    Button st,mode;
 
     ImageButton av,rc,dr,ga;
+
+    private int i=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         editTextToSend = (EditText)findViewById(R.id.editTextToSend);
         buttonSend = (Button)findViewById(R.id.buttonSend);
 
-        mode = (Switch)findViewById(R.id.mode);
+        mode = (Button) findViewById(R.id.mode);
 
         st = (Button)findViewById(R.id.st);
 
@@ -41,6 +43,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         dr = (ImageButton)findViewById(R.id.dr);
         ga = (ImageButton)findViewById(R.id.ga);
 
+        mode.setText("Mode manuel");
 
         //when the button is clicked send the data from the EditText
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +54,33 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
             }
         });
 
-        //mettre le switch
+        mode.setOnClickListener(new View.OnClickListener() {//avance
+            @Override
+            public void onClick(View view) {
+
+
+                if(i==0){
+                    mode.setText("Mode manuel");
+                    Log.d("BT", "mode manuel");
+                    Toast.makeText(ActivityConnected.this, "Passage en manuel", Toast.LENGTH_SHORT).show();
+                    //BluetoothManager.getInstance().sendData(ActivityConnected.this, avancer);
+                    i=1;
+                }else{
+                    mode.setText("Mode auto");
+                    Log.d("BT", "mode automatique");
+                    Toast.makeText(ActivityConnected.this, "Passage en auto", Toast.LENGTH_SHORT).show();
+                    //BluetoothManager.getInstance().sendData(ActivityConnected.this, avancer);
+                    i=0;
+                }
+
+
+
+
+
+
+
+            }
+        });
 
 
         av.setOnClickListener(new View.OnClickListener() {//avance
@@ -69,6 +98,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
             public void onClick(View view) {
                 String reculer = "f1r"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, reculer);
+                Log.d("BT", "recule !!!");
             }
         });
 
@@ -77,6 +107,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
             public void onClick(View view) {
                 String droite = "f1d"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, droite);
+                Log.d("BT", "droite !!!");
             }
         });
 
@@ -85,6 +116,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
             public void onClick(View view) {
                 String gauche = "f1g"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, gauche);
+                Log.d("BT", "gauche !!!");
             }
         });
 
@@ -94,6 +126,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
             public void onClick(View view) {
                 String stop = "f1s"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, stop);
+                Log.d("BT", "stop !!!");
             }
         });
 
