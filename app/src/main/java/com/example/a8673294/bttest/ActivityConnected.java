@@ -2,6 +2,7 @@ package com.example.a8673294.bttest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,16 +57,17 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         av.setOnClickListener(new View.OnClickListener() {//avance
             @Override
             public void onClick(View view) {
-                String avancer = "f1a";//f1a\0
+                String avancer = "f1a"+'\0';//f1a\0
                 //BluetoothManager.getInstance().sendData(ActivityConnected.this, editTextToSend.getText().toString());
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, avancer);
+                Log.d("BT", "avance !!!");
             }
         });
 
         rc.setOnClickListener(new View.OnClickListener() {//recule
             @Override
             public void onClick(View view) {
-                String reculer = "f1r";
+                String reculer = "f1r"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, reculer);
             }
         });
@@ -73,7 +75,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         dr.setOnClickListener(new View.OnClickListener() {//droite
             @Override
             public void onClick(View view) {
-                String droite = "f1d";
+                String droite = "f1d"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, droite);
             }
         });
@@ -81,7 +83,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         ga.setOnClickListener(new View.OnClickListener() {//gauche
             @Override
             public void onClick(View view) {
-                String gauche = "f1g";
+                String gauche = "f1g"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, gauche);
             }
         });
@@ -90,7 +92,7 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         st.setOnClickListener(new View.OnClickListener() {//stop
             @Override
             public void onClick(View view) {
-                String stop = "f1s";
+                String stop = "f1s"+'\0';
                 BluetoothManager.getInstance().sendData(ActivityConnected.this, stop);
             }
         });

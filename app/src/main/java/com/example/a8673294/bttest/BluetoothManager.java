@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,6 +101,7 @@ public class BluetoothManager {
     }
 
     public void startDiscover(BluetoothCallback bluetoothCallback){
+        Log.d("BT","nope");
         callback = bluetoothCallback;
         if(myBluetoothAdapter.isDiscovering())
             return;

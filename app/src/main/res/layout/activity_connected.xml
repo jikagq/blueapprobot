@@ -14,93 +14,109 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
-            android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="63dp"
-            android:layout_marginTop="-4dp" />
+            <Button
+                android:id="@+id/buttonSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="-4dp"
+                android:text="Send"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintTop_creator="1" />
 
 
             <EditText
                 android:id="@+id/editTextToSend"
-                android:layout_width="224dp"
-                android:layout_height="44dp"
+                android:layout_width="165dp"
+                android:layout_height="47dp"
                 android:singleLine="false"
-                tools:layout_constraintTop_creator="1"
-                tools:layout_constraintRight_creator="1"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:layout_constraintLeft_creator="1"
-                app:layout_constraintTop_toTopOf="@+id/buttonSend"
+                app:layout_constraintHorizontal_bias="0.777"
                 app:layout_constraintLeft_toRightOf="@+id/buttonSend"
-                android:layout_marginTop="0dp"
-                app:layout_constraintHorizontal_bias="0.777" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/buttonSend"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Send:"
+                android:layout_marginStart="8dp"
+                android:text="Debug:"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_conversion_absoluteHeight="82dp"
+                tools:layout_conversion_absoluteWidth="0dp"
                 tools:layout_conversion_absoluteX="384dp"
                 tools:layout_conversion_absoluteY="14dp"
-                tools:layout_conversion_absoluteWidth="0dp"
-                tools:layout_conversion_absoluteHeight="82dp"
-                tools:layout_editor_absoluteY="16dp"
-                tools:layout_editor_absoluteX="16dp" />
+                tools:layout_editor_absoluteY="16dp" />
 
             <ImageButton
                 android:id="@+id/rc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/arrow_down_float"
-                tools:layout_editor_absoluteX="172dp"
-                tools:layout_editor_absoluteY="281dp" />
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/st"
+                app:srcCompat="@android:drawable/arrow_down_float" />
 
             <ImageButton
                 android:id="@+id/av"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/arrow_up_float"
-                tools:layout_editor_absoluteX="172dp"
-                tools:layout_editor_absoluteY="189dp" />
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="300dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_up_float" />
 
             <ImageButton
                 android:id="@+id/ga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="350dp"
                 android:rotation="90"
-                app:srcCompat="@android:drawable/arrow_down_float"
-                tools:layout_editor_absoluteX="92dp"
-                tools:layout_editor_absoluteY="239dp" />
+                app:layout_constraintEnd_toStartOf="@+id/st"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_down_float" />
 
             <Button
                 android:id="@+id/st"
                 android:layout_width="71dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="144dp"
+                android:layout_marginTop="350dp"
                 android:text="STOP"
-                tools:layout_editor_absoluteX="157dp"
-                tools:layout_editor_absoluteY="235dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/dr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="350dp"
                 android:rotation="90"
-                app:srcCompat="@android:drawable/arrow_up_float"
-                tools:layout_editor_absoluteX="268dp"
-                tools:layout_editor_absoluteY="239dp" />
+                app:layout_constraintStart_toEndOf="@+id/st"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_up_float" />
 
             <Switch
                 android:id="@+id/mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Switch"
-                tools:layout_editor_absoluteX="151dp"
-                tools:layout_editor_absoluteY="102dp" />
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="152dp"
+                android:layout_marginTop="250dp"
+                android:text="Mode"
+                app:layout_constraintBottom_toTopOf="@+id/av"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </android.support.constraint.ConstraintLayout>

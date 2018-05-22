@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         // an UUID THAT YOU MUST GENERATE IN https://www.uuidgenerator.net/
         //and a unique name (that you also must change it!!!
         //BluetoothManager.getInstance().initializeBluetooth(this, "00001101-0000-1000-8000-00805F9B34FB","HEALTH_MODULE_1");
-        BluetoothManager.getInstance().initializeBluetooth(this, "00001101-0000-1000-8000-00805F9B34FB","Somethings");
+        BluetoothManager.getInstance().initializeBluetooth(this, "00001101-0000-1000-8000-00805F9B34FB","RNBT-B71E");
 
 
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M)
@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
             @Override
             public void onClick(View v) {
                 if(!BluetoothManager.getInstance().isBluetoothOn()) {
-                    Toast.makeText(MainActivity.this, "The BT device is OFF!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "The BT device is OFF!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 BluetoothManager.getInstance().startDiscover(MainActivity.this);
                 Log.d("BT","startDiscover");
+
                 spinnerDiscovering.setVisibility(View.VISIBLE);
 
             }
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
                     Log.d("BT", "permisionNOTGranted");
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
 
-                    Toast.makeText(MainActivity.this,"nope", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             }
