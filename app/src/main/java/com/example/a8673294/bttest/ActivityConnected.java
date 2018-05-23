@@ -57,19 +57,20 @@ public class ActivityConnected extends AppCompatActivity implements BluetoothCal
         mode.setOnClickListener(new View.OnClickListener() {//avance
             @Override
             public void onClick(View view) {
-
+                String manu = "f1m0;"+'\0';//f1a\0
+                String auto = "f1m1;"+'\0';//f1a\0
 
                 if(i==0){
                     mode.setText("Mode manuel");
                     Log.d("BT", "mode manuel");
                     Toast.makeText(ActivityConnected.this, "Passage en manuel", Toast.LENGTH_SHORT).show();
-                    //BluetoothManager.getInstance().sendData(ActivityConnected.this, avancer);
+                    BluetoothManager.getInstance().sendData(ActivityConnected.this, manu);
                     i=1;
                 }else{
                     mode.setText("Mode auto");
                     Log.d("BT", "mode automatique");
                     Toast.makeText(ActivityConnected.this, "Passage en auto", Toast.LENGTH_SHORT).show();
-                    //BluetoothManager.getInstance().sendData(ActivityConnected.this, avancer);
+                        BluetoothManager.getInstance().sendData(ActivityConnected.this, auto);
                     i=0;
                 }
 

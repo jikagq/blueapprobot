@@ -1,8 +1,11 @@
 package com.example.a8673294.bttest;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +15,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements BluetoothCallback{
     //declaration of the UI components
     ToggleButton toggleButtonBluetooth,toggleButtonVisible;
     ProgressBar spinnerDiscovering;
-    Button buttonConnect;
+    Button buttonConnect, about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         toggleButtonBluetooth = (ToggleButton)findViewById(R.id.toggleButtonBluetooth);
         spinnerDiscovering = (ProgressBar)findViewById(R.id.progressBarDiscover);
         toggleButtonVisible = (ToggleButton)findViewById(R.id.toggleButtonVisible);
+
+        about = (Button)findViewById(R.id.about);
 
         //set the toogleButton that will show how is the state of the bluetooth to the correct state
         toggleButtonBluetooth.setChecked(BluetoothManager.getInstance().isBluetoothOn());
@@ -104,6 +112,18 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
 
             }
         });
+
+        //a propos
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivity.this,Main2Activity.class);
+                startActivity(intent2);
+            }
+        });
+
+        this.listedescpateurs();
     }
 
     //on the destroy we make sure to close the connections that we made.
@@ -200,5 +220,17 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
                 break;
             }
         }
+    }
+////////////////////////////////////////
+
+    public void listedescpateurs () {
+
+       SensorManager mysens = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        List<Sensor> listecapteur = mysens.getSensorList(Sensor.TYPE_ALL);
+        TextView tv = (TextView)findViewById(R.id.tv);
+        for(Sensor sensor : listecapteur){
+            tv.append("-"+sensor.getType()+"\t : \t "+sensor.getName()+"\n");
+        }
+
     }
 }
