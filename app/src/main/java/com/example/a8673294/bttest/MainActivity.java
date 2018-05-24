@@ -1,6 +1,7 @@
 package com.example.a8673294.bttest;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,6 +27,10 @@ import android.widget.ToggleButton;
 import java.sql.SQLClientInfoException;
 import java.util.List;
 
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+
 public class MainActivity extends AppCompatActivity implements BluetoothCallback{
     //declaration of the UI components
     ToggleButton toggleButtonBluetooth,toggleButtonVisible;
@@ -36,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
 
     private int progress = 0;//etat de la barre
     private boolean mode;//
+    private float currentlum;
+    private Context mContext;
+
 
 
     @Override
@@ -43,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = getApplicationContext();
         //initialize the bluetooth with the activity,
         // an UUID THAT YOU MUST GENERATE IN https://www.uuidgenerator.net/
         //and a unique name (that you also must change it!!!
@@ -70,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
 
         about = (Button)findViewById(R.id.about);
         check = (CheckBox)findViewById(R.id.check);
+
+        int brightness = getScreenBrightness();
         seekbar = (SeekBar)findViewById(R.id.seekbar);
         seekbar.setMax(255);//lum
+        seekbar.setProgress(brightness);
 
         //set the toogleButton that will show how is the state of the bluetooth to the correct state
         toggleButtonBluetooth.setChecked(BluetoothManager.getInstance().isBluetoothOn());
@@ -139,6 +151,10 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         });
 
         this.listedescpateurs();
+        this.getsytemlum();
+
+
+
 
         check.setClickable(this.islightexist());
 
@@ -150,11 +166,14 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
                 if(check.isChecked()==true){
                     check.setText("manuel");
                     seekbar.setVisibility(0);
+                    lummode(mode,getContentResolver());
+
                 }else{
                     check.setText("auto");
                     seekbar.setVisibility(100);
-                    //fonction setlum
+                    lummode(mode,getContentResolver());
                 }
+                refreshBrightness();
 
             }
         });
@@ -162,12 +181,14 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
+                //changelum(getContentResolver(),progress);
                 //Toast.makeText(MainActivity.this, "Changing seekbar's progress"+progress, Toast.LENGTH_SHORT).show();
 
                 //ici passer en argumeny progress a la gestion de la luminosite
+                setScreenBrightness(i);
+                refreshBrightness();
             }
 
             @Override
@@ -179,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
             public void onStopTrackingTouch(SeekBar seekBar) {
                // Toast.makeText(MainActivity.this, "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
             }
+
         });
 
 
@@ -312,11 +334,52 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         return cap;
     }
 
-    void setlum(int lev){
 
 
+    public  void lummode(boolean mode, ContentResolver res){
+        if (mode) {
+            Settings.System.putInt(res, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);
+        } else {
+            Settings.System.putInt(res, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        }
+    }
 
+    public void getsytemlum(){
 
+        try {
+            currentlum = Settings.System.getInt(getContentResolver(),Settings.System.SCREEN_BRIGHTNESS);
+            Toast.makeText(this, "lum actuelle"+currentlum , Toast.LENGTH_LONG).show();
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setScreenBrightness(int brightnessValue){
+
+        // Make sure brightness value between 0 to 255
+        if(brightnessValue >= 0 && brightnessValue <= 255){
+            Settings.System.putInt(
+                    mContext.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS,
+                    brightnessValue
+            );
+        }
+    }
+
+    protected int getScreenBrightness(){
+
+        int brightnessValue = Settings.System.getInt(
+                mContext.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS,
+                0
+        );
+        return brightnessValue;
+    }
+
+    private void refreshBrightness() {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        getWindow().setAttributes(lp);
     }
 
 
