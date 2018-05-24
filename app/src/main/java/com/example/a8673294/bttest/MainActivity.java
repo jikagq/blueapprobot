@@ -7,18 +7,23 @@ import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.sql.SQLClientInfoException;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements BluetoothCallback{
@@ -26,6 +31,13 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
     ToggleButton toggleButtonBluetooth,toggleButtonVisible;
     ProgressBar spinnerDiscovering;
     Button buttonConnect, about;
+    SeekBar seekbar;
+    CheckBox check;
+
+    private int progress = 0;//etat de la barre
+    private boolean mode;//
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         toggleButtonVisible = (ToggleButton)findViewById(R.id.toggleButtonVisible);
 
         about = (Button)findViewById(R.id.about);
+        check = (CheckBox)findViewById(R.id.check);
+        seekbar = (SeekBar)findViewById(R.id.seekbar);
+        seekbar.setMax(255);//lum
 
         //set the toogleButton that will show how is the state of the bluetooth to the correct state
         toggleButtonBluetooth.setChecked(BluetoothManager.getInstance().isBluetoothOn());
@@ -112,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
 
             }
         });
-
+///////////////////////////////////////////////////////////////////////////////////////
         //a propos
 
         about.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +139,51 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         });
 
         this.listedescpateurs();
+
+        check.setClickable(this.islightexist());
+
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //choix du mode
+                mode = check.isChecked();//true->auto;false->manu
+                if(check.isChecked()==true){
+                    check.setText("manuel");
+                    seekbar.setVisibility(0);
+                }else{
+                    check.setText("auto");
+                    seekbar.setVisibility(100);
+                    //fonction setlum
+                }
+
+            }
+        });
+
+
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+
+                //Toast.makeText(MainActivity.this, "Changing seekbar's progress"+progress, Toast.LENGTH_SHORT).show();
+
+                //ici passer en argumeny progress a la gestion de la luminosite
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(MainActivity.this, "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+               // Toast.makeText(MainActivity.this, "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
     }
 
     //on the destroy we make sure to close the connections that we made.
@@ -233,4 +293,31 @@ public class MainActivity extends AppCompatActivity implements BluetoothCallback
         }
 
     }
+
+    public boolean islightexist(){
+        boolean cap=true;
+
+        SensorManager mysens = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Sensor light = mysens.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+        if(light == null){
+            Toast.makeText(this, "pas de lightsensor!", Toast.LENGTH_LONG).show();
+            cap=false;
+
+        }else{
+            Toast.makeText(this, "le capteur light existe!", Toast.LENGTH_LONG).show();
+            cap=true;
+        }
+
+        return cap;
+    }
+
+    void setlum(int lev){
+
+
+
+
+    }
+
+
 }

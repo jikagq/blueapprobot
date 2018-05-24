@@ -100,6 +100,22 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggleButtonVisible" />
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="103dp"
+        android:layout_height="159dp"
+        tools:layout_editor_absoluteX="246dp"
+        tools:layout_editor_absoluteY="253dp" />
+
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mode lum"
+        tools:layout_editor_absoluteX="249dp"
+        tools:layout_editor_absoluteY="207dp" />
+
 </android.support.constraint.ConstraintLayout>
 
 

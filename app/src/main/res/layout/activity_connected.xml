@@ -55,30 +55,30 @@
 
             <ImageButton
                 android:id="@+id/rc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="165dp"
-                android:layout_marginTop="12dp"
+                android:layout_width="62dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/st"
                 app:srcCompat="@android:drawable/arrow_down_float" />
 
             <ImageButton
                 android:id="@+id/av"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="165dp"
-                android:layout_marginTop="192dp"
+                android:layout_width="68dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="132dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/arrow_up_float" />
 
             <ImageButton
                 android:id="@+id/ga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginTop="236dp"
+                android:layout_width="61dp"
+                android:layout_height="69dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginTop="220dp"
                 android:rotation="90"
                 app:layout_constraintEnd_toStartOf="@+id/st"
                 app:layout_constraintTop_toTopOf="parent"
@@ -96,10 +96,10 @@
 
             <ImageButton
                 android:id="@+id/dr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="236dp"
+                android:layout_width="68dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="220dp"
                 android:rotation="90"
                 app:layout_constraintStart_toEndOf="@+id/st"
                 app:layout_constraintTop_toTopOf="parent"
@@ -109,8 +109,8 @@
                 android:id="@+id/mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="128dp"
-                android:layout_marginTop="136dp"
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="72dp"
                 android:text="Mode Manuel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
