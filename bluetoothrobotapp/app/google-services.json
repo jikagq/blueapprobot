@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "533648091596",
+    "firebase_url": "https://bluetoothrobotapp.firebaseio.com",
+    "project_id": "bluetoothrobotapp",
+    "storage_bucket": "bluetoothrobotapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533648091596:android:f66f84a3461ac946",
+        "android_client_info": {
+          "package_name": "com.example.pain.bluetoothrobotapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533648091596-skgqftfb8dpf3em2o2v0ri6vdqmbff8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pain.bluetoothrobotapp",
+            "certificate_hash": "df395389daee47ba9f687d53f26f4a15951f1977"
+          }
+        },
+        {
+          "client_id": "533648091596-g4n44g3749gi48rhd8801aeif8d5a23o.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "533648091596-g4n44g3749gi48rhd8801aeif8d5a23o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJr1ddha3cx7mWRfgsTV3QSirwgFYLW-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533648091596-g4n44g3749gi48rhd8801aeif8d5a23o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
